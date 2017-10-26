@@ -13,8 +13,8 @@ const receiveGifs = gifs => ( {
     gifs,
 } )
 
-const detailGif = gif => ( {
-    type: DETAIL_GIF,
+export const searchGif = gif => ( {
+    type: SEARCH_GIF,
     gif,
 } )
 

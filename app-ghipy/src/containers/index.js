@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getGifs } from '../actions'
+import { getGifs, searchGif } from '../actions'
 import Gif from '../components/Gifs'
 import SearchBox from '../components/SearchBox'
 import NotFound from '../components/NotFound'
@@ -21,6 +21,12 @@ class App extends Component {
         this.props.dispatch( getGifs( this.props.gif ) )
     }
 
+    componentWillReceiveProps( nextProps ) {
+        if ( nextProps.gif !== this.props.gif ) {
+            this.props.dispatch( getGifs( nextProps.gif ) )
+        }
+    }
+
     searchGif( e ) {
         if ( e.which === 13 ) {
             e.preventDefault()
@@ -29,7 +35,7 @@ class App extends Component {
 
             if ( param !== '' ) {
                 e.target.value = ''
-                this.props.dispatch( getGifs( param ) )
+                this.props.dispatch( searchGif( param ) )
             }
         }
     }
@@ -58,7 +64,9 @@ App.propTypes = {
 }
 
 const mapStateToProps = ( state ) => {
-    const { data, isLoading, gif } = state.data
+    const { gif } = state
+
+    const {  data, isLoading } = state.data
 
     return {
         data,
