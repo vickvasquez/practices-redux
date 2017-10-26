@@ -100,8 +100,6 @@ App.propTypes = {
 const mapStateToProps = ( state ) => {
     const { selectedReddit, postsByReddit } = state
 
-    console.log( state )
-
     const {
         isFetching,
         lastUpdated,
