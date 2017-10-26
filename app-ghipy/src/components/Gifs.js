@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import GifCss from './Gif.css'
 
-const Gif = ( { gifs } ) => (
-    <div>
+const Gif = ( { gifs, value } ) => (
+    <div className={ GifCss.grid }>
         {
             gifs.map( ( gif ) => {
                 const imgGif = gif.images.preview_gif.url
 
                 return (
-                    <div key={ gif.id }>
-                        <img src={ imgGif } alt="X" />
-                    </div>
+                    <a href={ gif.slug } className={ GifCss.itemImage } key={ gif.id }>
+                        <img src={ imgGif } alt={ value } />
+                    </a>
                 )
             } )
         }
@@ -19,6 +20,7 @@ const Gif = ( { gifs } ) => (
 
 Gif.propTypes = {
     gifs: PropTypes.arrayOf( PropTypes.array ).isRequired,
+    value: PropTypes.string.isRequired,
 }
 
 export default Gif

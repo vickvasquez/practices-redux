@@ -1,0 +1,17 @@
+.searchBox {
+	display:flex;
+	justify-content:center;
+	padding:1rem;
+	width:100%;
+}
+
+.searchInput{
+	box-shadow: 0 0 1px #5a5353;
+	color:rgba(0,0,0,.7);
+	font-weight:700;
+	font-size:1.2rem;
+	padding:.7rem;
+	border:0;
+	outline:0;
+	width:50%;
+}

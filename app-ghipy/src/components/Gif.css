@@ -1,0 +1,15 @@
+.grid {
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.itemImage {
+	margin:2rem .5rem;
+	flex-basis:20%
+}
+.itemImage img {
+	height:150px;
+	width:100%;
+}
