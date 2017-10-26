@@ -7,8 +7,8 @@ import SearchBox from '../components/SearchBox'
 import NotFound from '../components/NotFound'
 import Styles from './container.css'
 
-const showResult = data => (
-    data.length ? <Gif gifs={ data } value="Goku" /> : <NotFound />
+const showResult = ( data, gif ) => (
+    data.length ? <Gif gifs={ data } value={ gif } /> : <NotFound />
 )
 
 class App extends Component {
@@ -41,14 +41,14 @@ class App extends Component {
     }
 
     render() {
-        const { isLoading, data } = this.props
+        const { isLoading, data, gif } = this.props
         return (
             <div className={ Styles.container }>
 
                 <SearchBox onKeyPress={ this.searchGif } />
 
                 {
-                    isLoading ? <h1>Cargando gifs...</h1> : showResult( data )
+                    isLoading ? <h1>Cargando gifs...</h1> : showResult( data, gif )
                 }
 
             </div>
@@ -66,7 +66,7 @@ App.propTypes = {
 const mapStateToProps = ( state ) => {
     const { gif } = state
 
-    const {  data, isLoading } = state.data
+    const { data, isLoading } = state.data
 
     return {
         data,
@@ -74,5 +74,13 @@ const mapStateToProps = ( state ) => {
         isLoading,
     }
 }
+
+/*
+* La otra forma de manejar el dispatch es crear un mapDispatchToProps
+* Dentro del dispatch ejecutar un action creator
+*
+* const mapDispatchToProps = dispatch => ({ getGifs:( gif ) => dispatch( getGif(gif) ) })
+*
+*/
 
 export default connect( mapStateToProps )( App )
