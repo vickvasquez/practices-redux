@@ -2,9 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import GifCss from './Gif.css'
 
-const Gif = ( { gifs, value } ) => (
+const Gif = ( {
+    gifs,
+    value,
+    page,
+    pages,
+} ) => (
     <div>
-        <p> Resultados encontrados relacionados con <strong> { value } </strong> </p>
+        <h2> <strong> { value } </strong>  </h2>
+
+        <p> Resultados encontrados { page } / { pages }</p>
+
         <div className={ GifCss.grid }>
             {
 
@@ -23,8 +31,10 @@ const Gif = ( { gifs, value } ) => (
 )
 
 Gif.propTypes = {
-    gifs: PropTypes.arrayOf( PropTypes.array ).isRequired,
+    gifs: PropTypes.arrayOf( PropTypes.object ).isRequired,
     value: PropTypes.string.isRequired,
+    pages: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
 }
 
 export default Gif

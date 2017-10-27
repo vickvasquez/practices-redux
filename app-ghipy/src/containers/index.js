@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getGifs, searchGif } from '../actions'
+import { getGifs, searchGif, nextPage } from '../actions'
 import Gif from '../components/Gifs'
 import SearchBox from '../components/SearchBox'
 import NotFound from '../components/NotFound'
+import Pagination from '../components/Pagination'
 import Styles from './container.css'
 
-const showResult = ( data, gif ) => (
-    data.length ? <Gif gifs={ data } value={ gif } /> : <NotFound />
+const showResult = ( data, gif, page, pages ) => (
+    data.length ? <Gif gifs={ data } value={ gif } page={ page } pages={ pages } /> : <NotFound />
 )
 
 class App extends Component {
     constructor( props ) {
         super( props )
         this.searchGif = this.searchGif.bind( this )
+        this.nextPage = this.nextPage.bind( this )
     }
 
     componentDidMount() {
@@ -22,9 +24,13 @@ class App extends Component {
     }
 
     componentWillReceiveProps( nextProps ) {
-        if ( nextProps.gif !== this.props.gif ) {
+        if ( nextProps.gif !== this.props.gif || nextProps.page !== this.props.page ) {
             this.props.dispatch( getGifs( nextProps.gif ) )
         }
+    }
+
+    nextPage( page ) {
+        this.props.dispatch( nextPage( parseInt( page, 10 ) ) )
     }
 
     searchGif( e ) {
@@ -41,15 +47,23 @@ class App extends Component {
     }
 
     render() {
-        const { isLoading, data, gif } = this.props
+        const {
+            isLoading,
+            data,
+            gif,
+            page,
+            pages,
+        } = this.props
         return (
             <div className={ Styles.container }>
 
                 <SearchBox onKeyPress={ this.searchGif } />
 
                 {
-                    isLoading ? <h1>Cargando gifs...</h1> : showResult( data, gif )
+                    isLoading ? <h1>Cargando gifs...</h1> : showResult( data, gif, page, pages )
                 }
+
+                <Pagination pages={ pages } page={ page } onClick={ this.nextPage } />
 
             </div>
         )
@@ -61,17 +75,26 @@ App.propTypes = {
     data: PropTypes.arrayOf( PropTypes.object ).isRequired,
     isLoading: PropTypes.bool.isRequired,
     gif: PropTypes.string.isRequired,
+    page: PropTypes.number.isRequired,
+    pages: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = ( state ) => {
     const { gif } = state
 
-    const { data, isLoading } = state.data
+    const {
+        data,
+        isLoading,
+        page,
+        pages,
+    } = state.data
 
     return {
         data,
         gif,
         isLoading,
+        page,
+        pages,
     }
 }
 
