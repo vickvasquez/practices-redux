@@ -9,7 +9,15 @@ import Pagination from '../components/Pagination'
 import Styles from './container.css'
 
 const showResult = ( data, gif, page, pages ) => (
-    data.length ? <Gif gifs={ data } value={ gif } page={ page } pages={ pages } /> : <NotFound />
+    data.length
+        ? <Gif
+            gifs={ data }
+            value={ gif }
+            page={ page }
+            pages={ pages }
+        />
+
+        : <NotFound />
 )
 
 class App extends Component {
@@ -62,10 +70,17 @@ class App extends Component {
                 <SearchBox onKeyPress={ this.searchGif } />
 
                 {
-                    isLoading ? <h1>Cargando gifs...</h1> : showResult( data, gif, page, pages )
+                    isLoading
+                        ? <h1>Cargando gifs...</h1>
+                        : showResult( data, gif, page, pages )
                 }
 
-                <Pagination pages={ pages } page={ page } onClick={ this.nextPage } limitPagination={ 20 } />
+                <Pagination
+                    pages={ pages }
+                    page={ page }
+                    onClick={ this.nextPage }
+                    limitPagination={ 10 }
+                />
 
             </div>
         )

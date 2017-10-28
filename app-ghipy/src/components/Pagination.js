@@ -9,45 +9,77 @@ const Pagination = ( {
     limitPagination,
 } ) => {
     let counter = 0
-    let paginaInicial = 0
+    let initialPage = 0
 
     if ( pages === 0 || pages <= 0 ) {
         return ''
     }
 
     if ( ( page - limitPagination ) < 0 ) {
-        paginaInicial = 1
+        initialPage = 1
     } else if ( page + limitPagination >= pages ) {
-        paginaInicial = pages - ( limitPagination - 1 )
+        initialPage = pages - ( limitPagination - 1 )
     } else {
-        paginaInicial = page - 5
+        initialPage = page - 5
     }
 
     return (
         <ul className={ estilos.pagination }>
-            <li className={ estilos.itemPagination } disabled={ page === 1 ? 'true' : 'false' } onClick={ e => onClick( 1 ) }> Inicio </li>
-            <li className={ estilos.itemPagination } disabled={ page === 1 ? 'true' : 'false' } onClick={ e => onClick( page - 1 ) }> Anterior </li>
+
+            <button
+                className={ estilos.itemPagination }
+                disabled={ page === 1 }
+                onClick={ ( ) => onClick( 1 ) }
+            >
+                Inicio
+            </button>
+
+            <button
+                className={ estilos.itemPagination }
+                disabled={ page === 1 }
+                onClick={ ( ) => onClick( page - 1 ) }
+            >
+                Anterior
+            </button>
+
             {
                 [ ...Array( limitPagination ) ]
                     .map( ( ) => {
-                        const className = ( page === paginaInicial ) ? estilos.pageCurrent : estilos.itemPagination
+                        const className = ( page === initialPage )
+                            ? estilos.pageCurrent
+                            : estilos.itemPagination
 
-                        paginaInicial += 1
+                        initialPage += 1
                         counter += 1
 
                         return (
-                            <li
+                            <button
                                 key={ counter }
                                 className={ className }
                                 onClick={ e => onClick( e.target.innerHTML ) }
                             >
-                                { paginaInicial - 1}
-                            </li>
+                                { initialPage - 1 }
+                            </button>
                         )
                     } )
             }
-            <li className={ estilos.itemPagination } disabled={ page === pages ? 'true' : 'false' }  onClick={ e => onClick( page + 1 ) }> Siguiente </li>
-            <li className={ estilos.itemPagination } disabled={ page === pages ? 'true' : 'false' }  onClick={ e => onClick( pages ) }> Fin </li>
+
+            <button
+                className={ estilos.itemPagination }
+                disabled={ page === pages }
+                onClick={ ( ) => onClick( page + 1 ) }
+            >
+                Siguiente
+            </button>
+
+            <button
+                className={ estilos.itemPagination }
+                disabled={ page === pages }
+                onClick={ ( ) => onClick( pages ) }
+            >
+                Fin
+            </button>
+
         </ul>
     )
 }
