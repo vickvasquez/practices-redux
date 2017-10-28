@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { FETCH_GIFS, RECEIVE_GIFS, SEARCH_GIF, NEXT_PAGE } from '../actions'
 
-const searchGif = ( state = 'goku dbz', action ) => {
+const searchGif = ( state = ' trending ', action ) => {
     switch ( action.type ) {
     case SEARCH_GIF:
         return action.gif

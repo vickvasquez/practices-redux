@@ -30,7 +30,9 @@ class App extends Component {
     }
 
     nextPage( page ) {
-        this.props.dispatch( nextPage( parseInt( page, 10 ) ) )
+        if ( page > 0 && page <= this.props.pages ) {
+            this.props.dispatch( nextPage( parseInt( page, 10 ) ) )
+        }
     }
 
     searchGif( e ) {
@@ -63,7 +65,7 @@ class App extends Component {
                     isLoading ? <h1>Cargando gifs...</h1> : showResult( data, gif, page, pages )
                 }
 
-                <Pagination pages={ pages } page={ page } onClick={ this.nextPage } />
+                <Pagination pages={ pages } page={ page } onClick={ this.nextPage } limitPagination={ 10 } />
 
             </div>
         )
