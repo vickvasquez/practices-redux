@@ -65,7 +65,7 @@ class App extends Component {
                     isLoading ? <h1>Cargando gifs...</h1> : showResult( data, gif, page, pages )
                 }
 
-                <Pagination pages={ pages } page={ page } onClick={ this.nextPage } limitPagination={ 10 } />
+                <Pagination pages={ pages } page={ page } onClick={ this.nextPage } limitPagination={ 20 } />
 
             </div>
         )

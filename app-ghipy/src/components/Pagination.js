@@ -11,16 +11,14 @@ const Pagination = ( {
     let counter = 0
     let paginaInicial = 0
 
-    if( pages === 0 || pages <= 0 )
+    if ( pages === 0 || pages <= 0 ) {
         return ''
+    }
 
     if ( ( page - limitPagination ) < 0 ) {
         paginaInicial = 1
     } else if ( page + limitPagination >= pages ) {
-        console.log( ' Sumatoria' +  ( page +  limitPagination ) )
-        paginaInicial = pages - 9
-        console.log( 'Pagina inicial ' + paginaInicial )
-        console.log( 'Paginas '+ pages )
+        paginaInicial = pages - ( limitPagination - 1 )
     } else {
         paginaInicial = page - 5
     }
