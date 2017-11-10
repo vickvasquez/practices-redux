@@ -6,10 +6,10 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import App from './containers'
 
-const store = createStore( reducer, applyMiddleware( thunk, createLogger() ) )
+const store = createStore(reducer, applyMiddleware(thunk, createLogger()))
 
 const AppGif = () => (
-    <Provider store={ store }>
+    <Provider store={store}>
         <App />
     </Provider>
 )

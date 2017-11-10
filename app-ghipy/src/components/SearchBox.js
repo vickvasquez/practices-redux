@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Styles from './SearchBox.css'
 
-const SearchBox = ( { onKeyPress } ) => (
-    <div className={ Styles.searchBox }>
+const SearchBox = ({ onKeyPress }) => (
+    <div className={Styles.searchBox}>
         <input
             type="search"
-            className={ Styles.searchInput }
-            onKeyPress={ onKeyPress }
+            className={Styles.searchInput}
+            onKeyPress={onKeyPress}
             placeholder="Busca tu gif favorito"
         />
     </div>

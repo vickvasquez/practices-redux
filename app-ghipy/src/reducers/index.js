@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import { FETCH_GIFS, RECEIVE_GIFS, SEARCH_GIF, NEXT_PAGE } from '../actions'
 
-const searchGif = ( state = ' trending ', action ) => {
-    switch ( action.type ) {
+const searchGif = (state = ' trending ', action) => {
+    switch (action.type) {
     case SEARCH_GIF:
         return action.gif
     default:
@@ -10,14 +10,14 @@ const searchGif = ( state = ' trending ', action ) => {
     }
 }
 
-const gifs = ( state = {
+const gifs = (state = {
     isLoading: false,
     data: [],
     limit: 12,
     page: 1,
     pages: 0,
-}, action ) => {
-    switch ( action.type ) {
+}, action) => {
+    switch (action.type) {
     case FETCH_GIFS:
         return {
             ...state,
@@ -28,7 +28,7 @@ const gifs = ( state = {
             ...state,
             isLoading: false,
             data: action.gifs.data,
-            pages: Math.floor( action.gifs.pagination.total_count / state.limit ),
+            pages: Math.floor(action.gifs.pagination.total_count / state.limit),
         }
     case SEARCH_GIF:
         return {
@@ -45,9 +45,9 @@ const gifs = ( state = {
     }
 }
 
-const reducer = combineReducers( {
+const reducer = combineReducers({
     data: gifs,
     gif: searchGif,
-} )
+})
 
 export default reducer
